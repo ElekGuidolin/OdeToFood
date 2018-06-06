@@ -12,6 +12,13 @@
             <tr>
                 <td>@res.Id</td>
                 <td>@res.Name</td>
+                <td>
+                    
+                    @*Different ways to do 
+                    <a href="/home/details/@res.Id">Details</a>
+                    @Html.ActionLink("Go", "Details", new { id = res.Id})*@
+                    <a asp-action="Details" asp-route-id="@res.Id">More</a>
+                </td>
             </tr>
         }
     </table>
