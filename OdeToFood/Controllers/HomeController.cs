@@ -13,7 +13,12 @@ namespace OdeToFood.Controllers
                 Name = "Elaine's Place"
             };
 
-            return new ObjectResult(model);
+            //return new ObjectResult(model);
+
+            // I knew it ! LOL !
+            // Basically I'll ever return a view from here, sending to it the brand new value of the model as a parameter.
+
+            return View(model);
         }
     }
 }
