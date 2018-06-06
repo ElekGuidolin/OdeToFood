@@ -28,6 +28,7 @@ namespace OdeToFood
         {
             if (env.IsDevelopment())
             {
+                //ASPNETCORE_ENVIRONMENT can be set to anything you need in the development cycle. Like QA, UnitTests, and so on. Set in the Properties/launchSettings.json file
                 //Don't use that unless it's very important, because it shows a lot of the request, the error, the stack trace, and lot of stuff that a malicious user can use to attack your app.
                 app.UseDeveloperExceptionPage();
             }
@@ -61,8 +62,9 @@ namespace OdeToFood
                 //Just to test the error page.
                 //throw new Exception("error!");
 
+
                 var greeting = greeter.GetMessageOfTheDay();
-                await context.Response.WriteAsync(greeting);
+                await context.Response.WriteAsync($"{greeting} : {env.EnvironmentName}");
             });
         }
     }
