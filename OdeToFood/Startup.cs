@@ -26,36 +26,41 @@ namespace OdeToFood
                               IGreeter greeter,
                               ILogger<Startup> logger)
         {
-            //if (env.IsDevelopment())
+            if (env.IsDevelopment())
+            {
+                //Don't use that unless it's very important, because it shows a lot of the request, the error, the stack trace, and lot of stuff that a malicious user can use to attack your app.
+                app.UseDeveloperExceptionPage();
+            }
+
+            //Class Using IApplicationBuilder.
+            //app.Use(next =>
             //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            //    return async context =>
+            //    {
+            //        logger.LogInformation("Request Incoming");
+            //        if (context.Request.Path.StartsWithSegments("/mym"))
+            //        {
+            //            await context.Response.WriteAsync("Hit!!");
+            //            logger.LogInformation("Request handled");
+            //        }
+            //        else
+            //        {
+            //            await next(context);
+            //            logger.LogInformation("Response outgoing");
+            //        }
+            //    };
+            //});
 
-            app.Use(next =>
-            {
-                return async context =>
-                {
-                    logger.LogInformation("Request Incoming");
-                    if (context.Request.Path.StartsWithSegments("/mym"))
-                    {
-                        await context.Response.WriteAsync("Hit!!");
-                        logger.LogInformation("Request handled");
-                    }
-                    else
-                    {
-                        await next(context);
-                        logger.LogInformation("Response outgoing");
-                    }
-                };
-            });
-
-            app.UseWelcomePage(new WelcomePageOptions
-            {
-                Path="/wp"
-            });
+            //app.UseWelcomePage(new WelcomePageOptions
+            //{
+            //    Path="/wp"
+            //});
 
             app.Run(async (context) =>
             {
+                //Just to test the error page.
+                //throw new Exception("error!");
+
                 var greeting = greeter.GetMessageOfTheDay();
                 await context.Response.WriteAsync(greeting);
             });
