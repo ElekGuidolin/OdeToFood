@@ -33,6 +33,13 @@ namespace OdeToFood
                 app.UseDeveloperExceptionPage();
             }
 
+            //In this case the sequence matters. You can have an error if you change the lines.
+            //app.UseDefaultFiles();
+            //app.UseStaticFiles();
+
+            //Otherwise, if you use this way, you can guarantee that the static files will be searched first.
+            app.UseFileServer();
+
             //Class Using IApplicationBuilder.
             //app.Use(next =>
             //{
