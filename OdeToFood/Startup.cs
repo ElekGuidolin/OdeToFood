@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OdeToFood.Services;
 
 namespace OdeToFood
 {
@@ -18,6 +20,7 @@ namespace OdeToFood
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
+            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
             services.AddMvc();
         }
 
@@ -44,7 +47,10 @@ namespace OdeToFood
             //Setting up the ASP.NET MVC.
             app.UseStaticFiles();
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+
+            //Testing the error when calling without routing configuration
+            app.UseMvc(ConfigureRoutes);
 
             //Class Using IApplicationBuilder.
             //app.Use(next =>
@@ -77,8 +83,20 @@ namespace OdeToFood
 
 
                 var greeting = greeter.GetMessageOfTheDay();
-                await context.Response.WriteAsync($"{greeting} : {env.EnvironmentName}");
+                //Just to show the MVC configuration.
+                //await context.Response.WriteAsync($"{greeting} : {env.EnvironmentName}");
+
+                //In the last publish of the course, it was need to set the content type as showing below, but testing now (06/06/18), it was no longer necessary, at least to show simple text.
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync($"Not Found");
             });
+        }
+
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            // /Home/Index
+            routeBuilder.MapRoute("Default",
+                "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }
