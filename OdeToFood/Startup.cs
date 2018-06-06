@@ -44,7 +44,10 @@ namespace OdeToFood
             //Setting up the ASP.NET MVC.
             app.UseStaticFiles();
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+
+            //Testing the error when calling without routing configuration
+            app.UseMvc();
 
             //Class Using IApplicationBuilder.
             //app.Use(next =>
@@ -77,7 +80,12 @@ namespace OdeToFood
 
 
                 var greeting = greeter.GetMessageOfTheDay();
-                await context.Response.WriteAsync($"{greeting} : {env.EnvironmentName}");
+                //Just to show the MVC configuration.
+                //await context.Response.WriteAsync($"{greeting} : {env.EnvironmentName}");
+
+                //In the last publish of the course, it was need to set the content type as showing below, but testing now (06/06/18), it was no longer necessary, at least to show simple text.
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync($"Not Found");
             });
         }
     }
