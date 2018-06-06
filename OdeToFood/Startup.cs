@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -47,7 +48,7 @@ namespace OdeToFood
             //app.UseMvcWithDefaultRoute();
 
             //Testing the error when calling without routing configuration
-            app.UseMvc();
+            app.UseMvc(ConfigureRoutes);
 
             //Class Using IApplicationBuilder.
             //app.Use(next =>
@@ -87,6 +88,13 @@ namespace OdeToFood
                 context.Response.ContentType = "text/plain";
                 await context.Response.WriteAsync($"Not Found");
             });
+        }
+
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            // /Home/Index
+            routeBuilder.MapRoute("Default",
+                "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }
