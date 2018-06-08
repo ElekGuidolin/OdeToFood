@@ -35,6 +35,11 @@ namespace OdeToFood.Services
             return restaurant;
         }
 
+        public Restaurant Update(Restaurant restaurant)
+        {
+            throw new System.NotImplementedException();
+        }
+
         List<Restaurant> _restaurants;
 
     }
