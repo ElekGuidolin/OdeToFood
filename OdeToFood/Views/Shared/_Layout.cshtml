@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
     <div>
@@ -12,25 +13,7 @@
 
     <footer>
         @RenderSection("footer", required:false)
-        @*@await Component.InvokeAsync("Greeter")*@
         <vc:greeter></vc:greeter>
-        @if (User.Identity.IsAuthenticated)
-        {
-            foreach (var identity in User.Identities)
-            {
-                <h3>@identity.Name</h3>
-                <ul>
-                    @foreach (var claim in identity.Claims)
-                    {
-                        <li>@claim.Type - @claim.Value</li>
-                    }
-                </ul>
-            }
-        }
-        else
-        {
-            <div>You are anonymous.</div>
-        }
     </footer>
 </body>
 </html>
