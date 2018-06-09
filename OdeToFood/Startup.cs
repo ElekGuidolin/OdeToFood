@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,7 +39,13 @@ namespace OdeToFood
         {
             //ASPNETCORE_ENVIRONMENT can be set to anything you need in the development cycle. Like QA, UnitTests, and so on. Set in the Properties/launchSettings.json file
             //Don't use that unless it's very important, because it shows a lot of the request, the error, the stack trace, and lot of stuff that a malicious user can use to attack your app.
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
+
             app.UseStaticFiles();
             app.UseMvc(ConfigureRoutes);
 
