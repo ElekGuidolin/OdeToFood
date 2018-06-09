@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OdeToFood.Models;
 using OdeToFood.Services;
 
 namespace OdeToFood.Pages.Restaurants
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private IRestaurantData _restaurantData;
