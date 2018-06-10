@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/style/OdeToFood.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">OdeToFood</a>
+        <a class="justify-content-end btn btn-secondary" href="/">Login</a>
+    </nav>
+    <div class="container">
         @RenderBody()
+        <footer>
+            @RenderSection("footer", required: false)
+        </footer>
     </div>
-
-    <footer>
-        @RenderSection("footer", required:false)
-        <vc:greeter></vc:greeter>
-    </footer>
 </body>
 </html>

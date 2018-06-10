@@ -2,22 +2,34 @@
 
 @{
     ViewBag.Title = "Create";
-
 }
 
-<h1>Create</h1>
-
-<form method="post">
-
-    <div>
-        <label asp-for="Name"></label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
+<div class="card">
+    <h3 class="card-header">Create</h3>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-inline">
+                <div class="form-group col-12">
+                    <label asp-for="Name" class="col-2"></label>
+                    <input asp-for="Name" class="form-control col-4" />
+                    <span asp-validation-for="Name" class="text-muted col-4"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-group col-12">
+                    <label asp-for="Cuisine" class="col-2"></label>
+                    <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<CuisineType>()" class="form-control col-4"></select>
+                    <span asp-validation-for="Cuisine" class="text-muted col-4"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-group col-12">
+                    <div class="col-6">
+                        <input type="submit" name="save" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div>
-        <label asp-for="Cuisine"></label>
-        <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<CuisineType>()"></select>
-        <span asp-validation-for="Cuisine"></span>
-    </div>
-    <input type="submit" name="save" value="Save" />
-</form>
+
+</div>
