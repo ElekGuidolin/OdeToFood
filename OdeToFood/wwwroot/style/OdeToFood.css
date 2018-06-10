@@ -1,0 +1,14 @@
+﻿body {
+}
+
+.card{
+    margin-bottom: 5px;
+}
+
+.form-inline .form-group{
+    margin-bottom: 5px;
+}
+
+.form-inline .form-group label {
+    justify-content: flex-start;
+}
